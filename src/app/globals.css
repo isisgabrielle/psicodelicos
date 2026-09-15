@@ -73,12 +73,12 @@ button {
   font-family: inherit;
 }
 
-/* Glassmorphism Utilities */
-.glass {
-  background: var(--background-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+/* Card Utilities */
+.card {
+  background: var(--background-lighter);
   border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Typography Utilities */
@@ -102,18 +102,12 @@ button {
   font-weight: 600;
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, var(--primary) 0%, #20d6b5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.text-accent {
+  color: var(--secondary);
 }
 
-.text-gradient-purple {
-  background: linear-gradient(135deg, var(--secondary) 0%, #b084f5 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.text-accent-alt {
+  color: #20d6b5;
 }
 
 /* Base Layout */

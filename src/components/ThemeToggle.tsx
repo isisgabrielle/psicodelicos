@@ -19,8 +19,8 @@ export default function ThemeToggle() {
   };
 
   return (
-    <button 
-      onClick={toggleTheme} 
+    <button
+      onClick={toggleTheme}
       style={{
         background: "transparent",
         border: "1px solid var(--border)",
@@ -32,7 +32,7 @@ export default function ThemeToggle() {
         marginLeft: "1rem"
       }}
     >
-      {theme === "light" ? "🌙 Modo Escuro" : "☀️ Modo Dia"}
+      {theme === "light" ? "Modo Escuro" : "Modo Dia"}
     </button>
   );
 }
