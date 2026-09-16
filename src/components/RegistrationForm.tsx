@@ -1,12 +1,34 @@
 "use client";
 
 import { useState } from "react";
+import PixPaymentBox from "./PixPaymentBox";
 import styles from "./RegistrationForm.module.css";
 
 export default function RegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [fileName, setFileName] = useState<string | null>(null);
+
+  // Formatações utilitárias
+  const formatCPF = (value: string) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+      .slice(0, 14);
+  };
+
+  const formatPhone = (value: string) => {
+    return value
+      .replace(/\D/g, "")
+      .replace(/^(\d{2})(\d)/g, "($1) $2")
+      .replace(/(\d{5})(\d)/, "$1-$2")
+      .slice(0, 15);
+  };
+
+  const [cpf, setCpf] = useState("");
+  const [phone, setPhone] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,6 +48,8 @@ export default function RegistrationForm() {
       setSubmitStatus("success");
       (e.target as HTMLFormElement).reset();
       setFileName(null);
+      setCpf("");
+      setPhone("");
     } catch (error) {
       console.error(error);
       setSubmitStatus("error");
@@ -60,20 +84,57 @@ export default function RegistrationForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      {/* Nome Completo */}
       <div className={styles.formGroup}>
         <label htmlFor="name">Nome Completo</label>
         <input type="text" id="name" name="name" required placeholder="Digite seu nome completo" />
       </div>
 
-      <div className={styles.formGroup}>
-        <label htmlFor="email">E-mail</label>
-        <input type="email" id="email" name="email" required placeholder="seu.email@exemplo.com" />
-      </div>
-
+      {/* E-mail e Telefone */}
       <div className={styles.formRow}>
         <div className={styles.formGroup}>
-          <label htmlFor="curso">Curso</label>
-          <input type="text" id="curso" name="curso" required defaultValue="Psicologia" />
+          <label htmlFor="email">E-mail</label>
+          <input type="email" id="email" name="email" required placeholder="seu.email@exemplo.com" />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="telefone">Número de Telefone / WhatsApp</label>
+          <input 
+            type="tel" 
+            id="telefone" 
+            name="telefone" 
+            required 
+            placeholder="(00) 00000-0000"
+            value={phone}
+            onChange={(e) => setPhone(formatPhone(e.target.value))}
+          />
+        </div>
+      </div>
+
+      {/* CPF e Data de Nascimento */}
+      <div className={styles.formRow}>
+        <div className={styles.formGroup}>
+          <label htmlFor="cpf">CPF</label>
+          <input 
+            type="text" 
+            id="cpf" 
+            name="cpf" 
+            required 
+            placeholder="000.000.000-00"
+            value={cpf}
+            onChange={(e) => setCpf(formatCPF(e.target.value))}
+          />
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="nascimento">Data de Nascimento</label>
+          <input type="date" id="nascimento" name="nascimento" required />
+        </div>
+      </div>
+
+      {/* Matrícula e Período */}
+      <div className={styles.formRow}>
+        <div className={styles.formGroup}>
+          <label htmlFor="matricula">Matrícula Acadêmica</label>
+          <input type="text" id="matricula" name="matricula" required placeholder="Ex: 2024101234" />
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="periodo">Período</label>
@@ -94,6 +155,10 @@ export default function RegistrationForm() {
         </div>
       </div>
 
+      {/* Pagamento PIX */}
+      <PixPaymentBox pixKey="atlpsicodelicos@gmail.com" amount="R$ 35,00" />
+
+      {/* Comprovante */}
       <div className={styles.formGroup}>
         <label>Comprovante de Pagamento (Imagem ou PDF)</label>
         <div className={styles.fileUploadWrapper}>
@@ -113,6 +178,16 @@ export default function RegistrationForm() {
             </span>
           </div>
         </div>
+      </div>
+
+      {/* Termos e Condições */}
+      <div className={styles.checkboxGroup}>
+        <label className={styles.checkboxLabel}>
+          <input type="checkbox" id="termos" name="termos" required className={styles.checkboxInput} />
+          <span>
+            Declaro que sou estudante de <strong>Psicologia</strong> e concordo com os termos e o estatuto da Atlética Psicodélicos.
+          </span>
+        </label>
       </div>
 
       {submitStatus === "error" && (

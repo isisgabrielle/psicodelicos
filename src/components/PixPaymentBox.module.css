@@ -1,0 +1,256 @@
+.pixContainer {
+  background: var(--background-lighter);
+  border: 3px solid var(--border);
+  padding: 1.25rem 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 4px 4px 0px 0px var(--border);
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .pixContainer {
+    border-width: 4px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 6px 6px 0px 0px var(--border);
+  }
+}
+
+.pixContainer::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  height: 6px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--secondary),
+    var(--secondary) 10px,
+    var(--accent-green) 10px,
+    var(--accent-green) 20px
+  );
+  border-bottom: 3px solid var(--border);
+}
+
+.pixBadge {
+  align-self: flex-start;
+  background: var(--accent-green);
+  color: #000;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.75rem;
+  border: 2px solid var(--border);
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .pixBadge {
+    font-size: 1.2rem;
+    padding: 0.4rem 1rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.priceHighlight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.25rem;
+  border-bottom: 3px dashed var(--border);
+  padding-bottom: 0.75rem;
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .priceHighlight {
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 1rem;
+  }
+}
+
+.priceLabel {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--foreground);
+}
+
+@media (min-width: 640px) {
+  .priceLabel {
+    font-size: 1.4rem;
+  }
+}
+
+.priceValue {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--secondary);
+  line-height: 1;
+}
+
+@media (min-width: 640px) {
+  .priceValue {
+    font-size: 2.5rem;
+  }
+}
+
+.pixKeyWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+  background: rgba(126, 61, 209, 0.05);
+  border: 2px solid var(--border);
+  padding: 0.75rem;
+  width: 100%;
+}
+
+@media (min-width: 540px) {
+  .pixKeyWrapper {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border-width: 3px;
+  }
+}
+
+.pixKeyInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+.keyLabel {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  color: var(--foreground-muted);
+  letter-spacing: 0.05em;
+}
+
+.keyCode {
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--foreground);
+  user-select: all;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 0.4rem 0.6rem;
+  border-left: 3px solid var(--secondary);
+  width: 100%;
+}
+
+@media (min-width: 480px) {
+  .keyCode {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+.copyButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--secondary);
+  color: #fff;
+  border: 2px solid var(--border);
+  padding: 0.6rem 0.85rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 3px 3px 0px 0px var(--border);
+  width: 100%;
+}
+
+@media (min-width: 540px) {
+  .copyButton {
+    width: auto;
+    font-size: 1.1rem;
+    padding: 0.75rem 1rem;
+    border-width: 3px;
+    box-shadow: 4px 4px 0px 0px var(--border);
+  }
+}
+
+.copyButton:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px 0px var(--border);
+  background: var(--secondary-hover);
+}
+
+.copyButton.copied {
+  background: var(--accent-green);
+  color: #000;
+}
+
+.qrWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.03);
+  border: 2px dashed var(--border);
+}
+
+.qrImage {
+  background: #fff;
+  padding: 0.5rem;
+  border: 3px solid var(--border);
+  box-shadow: 4px 4px 0px 0px var(--border);
+  max-width: 180px;
+  height: auto;
+}
+
+.qrHint {
+  font-size: 0.85rem;
+  color: var(--foreground-muted);
+  font-weight: 600;
+  text-align: center;
+}
+
+.qrToggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--foreground);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.6rem;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.qrToggle:hover {
+  background: rgba(110, 27, 204, 0.08);
+  color: var(--secondary);
+}
+
+.pixNotice {
+  font-size: 0.85rem;
+  color: var(--foreground-muted);
+  line-height: 1.4;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+

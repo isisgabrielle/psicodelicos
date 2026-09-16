@@ -1,7 +1,11 @@
+/* ==========================================
+   FORMULÁRIO DE INSCRIÇÃO - CSS
+   ========================================== */
+
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
   width: 100%;
   text-align: left;
 }
@@ -9,59 +13,134 @@
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
   width: 100%;
 }
 
 .formRow {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
+  width: 100%;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .formRow {
     flex-direction: row;
+    gap: 1.5rem;
   }
 }
 
 .form label {
-  font-weight: 600;
+  font-family: var(--font-display);
   font-size: 0.95rem;
-  color: var(--foreground-muted);
+  letter-spacing: 0.05em;
+  color: var(--foreground);
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .form label {
+    font-size: 1.1rem;
+  }
 }
 
 .form input[type="text"],
 .form input[type="email"],
+.form input[type="tel"],
+.form input[type="date"],
 .form select {
   width: 100%;
-  padding: 1rem;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.2);
+  padding: 0.75rem 0.85rem;
+  border-radius: 0;
+  border: 2px solid var(--border);
+  background: var(--background-lighter);
   color: var(--foreground);
-  font-family: inherit;
+  font-family: var(--font-body);
   font-size: 1rem;
   transition: all 0.2s ease;
+  box-shadow: 3px 3px 0px 0px var(--border);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .form input[type="text"],
+  .form input[type="email"],
+  .form input[type="tel"],
+  .form input[type="date"],
+  .form select {
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    border-width: 3px;
+    box-shadow: 4px 4px 0px 0px var(--border);
+  }
 }
 
 .form input[type="text"]:focus,
 .form input[type="email"]:focus,
+.form input[type="tel"]:focus,
+.form input[type="date"]:focus,
 .form select:focus {
   outline: none;
-  border-color: var(--primary);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px 0px var(--accent-green);
+  border-color: var(--accent-green);
 }
 
 .form select option {
-  background: var(--background);
+  background: var(--background-lighter);
   color: var(--foreground);
 }
 
-/* File Upload Customization */
+/* Checkbox de Termos */
+.checkboxGroup {
+  display: flex;
+  align-items: flex-start;
+  padding: 0.85rem;
+  border: 2px solid var(--border);
+  background: rgba(110, 27, 204, 0.05);
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .checkboxGroup {
+    padding: 1rem;
+    border-width: 3px;
+  }
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.85rem;
+  color: var(--foreground);
+  cursor: pointer;
+  line-height: 1.45;
+}
+
+@media (min-width: 640px) {
+  .checkboxLabel {
+    font-size: 0.95rem;
+    gap: 0.75rem;
+  }
+}
+
+.checkboxInput {
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--secondary);
+  cursor: pointer;
+}
+
+/* Upload de comprovante */
 .fileUploadWrapper {
   position: relative;
   width: 100%;
-  min-height: 120px;
+  min-height: 95px;
+  cursor: pointer;
 }
 
 .fileInput {
@@ -75,117 +154,206 @@
   z-index: 10;
 }
 
-.fileCustom {
+.fileCustom,
+.fileUploadUi {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   border: 2px dashed var(--border);
-  border-radius: var(--radius-md);
+  background: var(--background-lighter);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  background: rgba(0, 0, 0, 0.1);
+  gap: 0.4rem;
   transition: all 0.2s ease;
   pointer-events: none;
-}
-
-.fileInput:hover + .fileCustom {
-  border-color: var(--primary-muted);
-  background: rgba(85, 255, 85, 0.05);
-}
-
-.fileInput:focus + .fileCustom {
-  border-color: var(--primary);
-}
-
-.fileIcon {
-  font-size: 2rem;
-}
-
-.fileText {
-  color: var(--foreground-muted);
-  font-size: 0.9rem;
+  padding: 0.85rem;
+  box-sizing: border-box;
   text-align: center;
-  padding: 0 1rem;
 }
 
-.submitButton {
-  background: var(--primary);
-  color: var(--background);
-  border: none;
-  padding: 1.25rem;
-  border-radius: var(--radius-md);
-  font-weight: 700;
-  font-size: 1.125rem;
-  cursor: pointer;
+@media (min-width: 640px) {
+  .fileCustom,
+  .fileUploadUi {
+    border-width: 3px;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+}
+
+.fileUploadWrapper:hover .fileCustom,
+.fileUploadWrapper:hover .fileUploadUi {
+  border-color: var(--secondary);
+  background: rgba(110, 27, 204, 0.05);
+}
+
+.fileIcon,
+.fileUploadIcon {
+  font-size: 1.6rem;
+  color: var(--secondary);
+}
+
+.fileText,
+.fileUploadText {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--foreground);
+  word-break: break-word;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .fileText,
+  .fileUploadText {
+    font-size: 0.95rem;
+  }
+}
+
+.fileUploadSubtext {
+  color: var(--foreground-muted);
+  font-size: 0.75rem;
+}
+
+.fileInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  background: rgba(164, 245, 66, 0.2);
+  border: 2px solid var(--accent-green);
+  color: var(--foreground);
+  font-size: 0.85rem;
+}
+
+/* Mensagens de Erro */
+.errorText {
+  color: var(--error);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 0.25rem;
+}
+
+.errorMessage {
+  background: rgba(255, 51, 51, 0.1);
+  color: var(--error);
+  padding: 0.85rem;
+  border: 2px solid var(--error);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Botão de Submit */
+.submitButton,
+.btnSubmit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: var(--secondary);
+  color: #fff;
+  padding: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  border: 2px solid var(--border);
+  box-shadow: 4px 4px 0px 0px var(--border);
   transition: all 0.2s ease;
-  margin-top: 1rem;
-  box-shadow: var(--shadow-glow);
+  margin-top: 0.5rem;
+  cursor: pointer;
 }
 
-.submitButton:hover:not(:disabled) {
-  background: var(--primary-hover);
-  transform: translateY(-2px);
+@media (min-width: 640px) {
+  .submitButton,
+  .btnSubmit {
+    padding: 1.25rem;
+    font-size: 1.4rem;
+    border-width: 3px;
+  }
 }
 
-.submitButton:disabled {
-  opacity: 0.7;
+.submitButton:hover:not(:disabled),
+.btnSubmit:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px var(--border);
+  background: var(--secondary-hover);
+}
+
+.submitButton:disabled,
+.btnSubmit:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
-  transform: none;
   box-shadow: none;
+  transform: none;
+  background: var(--foreground-muted);
 }
 
-/* Success and Error States */
+/* Mensagem de Sucesso */
 .successMessage {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding: 3rem 1rem;
   text-align: center;
+  padding: 2rem 1rem;
+  background: var(--background-lighter);
+  border: 3px solid var(--accent-green);
+  box-shadow: 6px 6px 0px 0px var(--accent-green);
+  gap: 1.25rem;
+  width: 100%;
 }
 
 .successIcon {
-  width: 80px;
-  height: 80px;
-  background: var(--primary);
-  color: var(--background);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  box-shadow: var(--shadow-glow);
+  color: var(--accent-green);
 }
 
-.btnReset {
+.successMessage h3 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--foreground);
+}
+
+.successMessage p {
+  color: var(--foreground-muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 400px;
+}
+
+/* Botão de reset pós-sucesso */
+.btnReset,
+.btnSuccess {
+  margin-top: 0.5rem;
   background: transparent;
-  color: var(--primary);
-  border: 1px solid var(--primary);
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-full);
-  margin-top: 1.5rem;
+  color: var(--foreground);
+  border: 2px solid var(--border);
+  padding: 0.65rem 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 3px 3px 0px 0px var(--border);
 }
 
-.btnReset:hover {
-  background: rgba(85, 255, 85, 0.1);
+.btnReset:hover,
+.btnSuccess:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0px 0px var(--border);
 }
 
-.errorMessage {
-  background: rgba(255, 74, 74, 0.1);
-  color: var(--error);
-  padding: 1rem;
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 74, 74, 0.3);
-  text-align: center;
-  font-size: 0.9rem;
+/* Animação de loading */
+.loadingSpinner {
+  animation: spin 1s linear infinite;
+  display: inline-block;
 }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+

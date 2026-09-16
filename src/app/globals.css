@@ -1,46 +1,53 @@
 :root {
   /* Light Mode (Modo Dia) */
-  --background: #f8f9fa;
+  --background: #f4f4f4;
   --background-lighter: #ffffff;
-  --background-card: rgba(255, 255, 255, 0.8);
-  --foreground: #1a1a2e;
-  --foreground-muted: #4a4a68;
+  --background-card: #ffffff;
+  --foreground: #101014;
+  --foreground-muted: #3a3a46;
   
-  --primary: #2a2a2a;
-  --primary-hover: #404040;
-  --primary-muted: rgba(0, 0, 0, 0.05);
+  --primary: #101014;
+  --primary-hover: #2d2d35;
+  --primary-muted: rgba(16, 16, 20, 0.05);
   
-  --secondary: #7e3dd1;
-  --secondary-hover: #9b58f5;
+  --secondary: #6e1bcc;
+  --secondary-hover: #832de8;
+  --accent-green: #a4f542;
   
-  --border: rgba(0, 0, 0, 0.1);
-  --error: #ff4a4a;
+  --border: #101014;
+  --border-light: rgba(0, 0, 0, 0.15);
+  --error: #ff3333;
   
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
+  --radius-sm: 0px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
   --radius-full: 9999px;
   
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-sm: 4px 4px 0px 0px var(--border);
+  --shadow-md: 8px 8px 0px 0px var(--border);
   --shadow-glow: none;
-  --shadow-glow-purple: none;
 }
 
 [data-theme="dark"] {
   /* Dark Mode */
-  --background: #0b0827;
-  --background-lighter: #130e3f;
-  --background-card: rgba(19, 14, 63, 0.6);
+  --background: #09090b;
+  --background-lighter: #15151a;
+  --background-card: #15151a;
   --foreground: #ffffff;
-  --foreground-muted: #b0a8d6;
+  --foreground-muted: #a6a6b5;
   
   --primary: #ffffff;
   --primary-hover: #e0e0e0;
   --primary-muted: rgba(255, 255, 255, 0.1);
   
-  --border: rgba(255, 255, 255, 0.1);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --border: rgba(255, 255, 255, 0.2);
+  --border-light: rgba(255, 255, 255, 0.1);
+  
+  --secondary: #8c3ce6;
+  --accent-green: #b9ff5e;
+  
+  --shadow-sm: 4px 4px 0px 0px rgba(140, 60, 230, 0.5);
+  --shadow-md: 8px 8px 0px 0px rgba(140, 60, 230, 0.5);
 }
 
 * {
@@ -52,11 +59,13 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body), system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  /* Uma textura de grain super leve pra não ficar estéril */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
 }
 
 a {
@@ -76,30 +85,40 @@ button {
 /* Card Utilities */
 .card {
   background: var(--background-lighter);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 /* Typography Utilities */
+h1, h2, h3, h4, .heading-display {
+  font-family: var(--font-display), sans-serif;
+  text-transform: uppercase;
+}
+
 .heading-1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1.1;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.2rem, 7.5vw, 6rem);
+  line-height: 0.95;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+  word-break: break-word;
 }
 
 .heading-2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.8rem, 5vw, 4rem);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  word-break: break-word;
 }
 
 .heading-3 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  line-height: 1.3;
-  font-weight: 600;
+  font-size: clamp(1.3rem, 3.5vw, 2.2rem);
+  line-height: 1.1;
+  font-weight: 400;
+  word-break: break-word;
 }
 
 .text-accent {
@@ -107,7 +126,7 @@ button {
 }
 
 .text-accent-alt {
-  color: #20d6b5;
+  color: var(--accent-green);
 }
 
 /* Base Layout */
@@ -115,15 +134,21 @@ button {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
+}
+
+@media (min-width: 480px) {
+  .container {
+    padding: 0 1.5rem;
+  }
 }
 
 .section {
-  padding: 5rem 0;
+  padding: 3rem 0;
 }
 
 @media (min-width: 768px) {
   .section {
-    padding: 8rem 0;
+    padding: 7rem 0;
   }
 }
