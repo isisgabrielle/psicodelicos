@@ -37,8 +37,9 @@ export async function POST(request: Request) {
 
       const mailOptions = {
         from: `"Atlética Psicodélicos" <${smtpEmail}>`,
+        replyTo: `"${name}" <${email}>`,
         to: receiverEmail,
-        subject: `Nova Inscrição - ${name}`,
+        subject: `[Inscrição Psicodélicos] ${name}`,
         html: `
           <h2>Nova Solicitação de Adesão/Inscrição</h2>
           <p><strong>Nome:</strong> ${name}</p>

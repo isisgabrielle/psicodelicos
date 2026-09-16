@@ -138,7 +138,7 @@ export default function Home() {
 
             <div className={styles.activityBrutalItem}>
               <div className={styles.activityBrutalIconBox}>
-                <Image src="/carinhaverde.png" alt="Logo" width={60} height={60} />
+                <Image src="/carinhaverde.PNG" alt="Logo" width={60} height={60} />
               </div>
               <div className={styles.activityBrutalInfo}>
                 <h3 className={styles.activityBrutalTitle}>ESPORTES & TREINOS</h3>

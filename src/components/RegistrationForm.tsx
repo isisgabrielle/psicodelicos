@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import PixPaymentBox from "./PixPaymentBox";
 import styles from "./RegistrationForm.module.css";
 
@@ -72,7 +73,7 @@ export default function RegistrationForm() {
         <div className={styles.successIcon}>✓</div>
         <h3>Inscrição Recebida!</h3>
         <p>Seus dados e o comprovante foram enviados com sucesso para a nossa equipe.</p>
-        <button 
+        <button
           className={styles.btnReset}
           onClick={() => setSubmitStatus("idle")}
         >
@@ -98,11 +99,11 @@ export default function RegistrationForm() {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="telefone">Número de Telefone / WhatsApp</label>
-          <input 
-            type="tel" 
-            id="telefone" 
-            name="telefone" 
-            required 
+          <input
+            type="tel"
+            id="telefone"
+            name="telefone"
+            required
             placeholder="(00) 00000-0000"
             value={phone}
             onChange={(e) => setPhone(formatPhone(e.target.value))}
@@ -114,11 +115,11 @@ export default function RegistrationForm() {
       <div className={styles.formRow}>
         <div className={styles.formGroup}>
           <label htmlFor="cpf">CPF</label>
-          <input 
-            type="text" 
-            id="cpf" 
-            name="cpf" 
-            required 
+          <input
+            type="text"
+            id="cpf"
+            name="cpf"
+            required
             placeholder="000.000.000-00"
             value={cpf}
             onChange={(e) => setCpf(formatCPF(e.target.value))}
@@ -162,17 +163,17 @@ export default function RegistrationForm() {
       <div className={styles.formGroup}>
         <label>Comprovante de Pagamento (Imagem ou PDF)</label>
         <div className={styles.fileUploadWrapper}>
-          <input 
-            type="file" 
-            id="comprovante" 
-            name="comprovante" 
-            accept="image/*,.pdf" 
-            required 
+          <input
+            type="file"
+            id="comprovante"
+            name="comprovante"
+            accept="image/*,.pdf"
+            required
             className={styles.fileInput}
             onChange={handleFileChange}
           />
           <div className={styles.fileCustom}>
-            <span className={styles.fileIcon}>📄</span>
+            <span className={styles.fileIcon}></span>
             <span className={styles.fileText}>
               {fileName ? fileName : "Clique ou arraste o comprovante aqui"}
             </span>
@@ -185,7 +186,15 @@ export default function RegistrationForm() {
         <label className={styles.checkboxLabel}>
           <input type="checkbox" id="termos" name="termos" required className={styles.checkboxInput} />
           <span>
-            Declaro que sou estudante de <strong>Psicologia</strong> e concordo com os termos e o estatuto da Atlética Psicodélicos.
+            Declaro que sou estudante de Psicologia e concordo com os termos e o{" "}
+            <Link
+              href="https://docs.google.com/document/d/1l3hOg9ytrLz_cv5cC5lKvVtcShZwjUok59u_t_3hefw/edit?tab=t.0"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <strong>estatuto</strong>
+            </Link>{" "}
+            da Atlética Psicodélicos.
           </span>
         </label>
       </div>
@@ -196,8 +205,8 @@ export default function RegistrationForm() {
         </div>
       )}
 
-      <button 
-        type="submit" 
+      <button
+        type="submit"
         className={styles.submitButton}
         disabled={isSubmitting}
       >

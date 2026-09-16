@@ -357,3 +357,14 @@
   to { transform: rotate(360deg); }
 }
 
+.link {
+  color: var(--secondary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
